@@ -1,0 +1,35 @@
+footer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  background-color: #2ac420;
+  height: 40px;
+  margin: 0 auto;
+  padding: 20px 0;
+  text-align: center;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+}
+
+button {
+  display: flex;
+  align-items: center;
+  height: 35px;
+  color: #424242;
+  /* border-style: hidden; */
+}
+
+#calls {
+  width: 80px;
+}
+#archived {
+  width: 80px;
+}
+
+#keypad {
+  position: relative;
+  bottom: 40px;
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+}
