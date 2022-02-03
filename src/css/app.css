@@ -21,4 +21,5 @@
 
 #app .container-view {
   padding: 20px;
+  overflow-y: scroll;
 }

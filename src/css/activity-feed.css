@@ -1,0 +1,36 @@
+.call-container {
+  display: flex;
+  flex-direction: column;
+  height: 466px;
+}
+
+.call-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100px;
+  padding: 10px;
+  border-style: solid;
+  border-radius: 10px;
+}
+
+.caller-details {
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.icons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.call-time {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-bottom: 5px;
+}
