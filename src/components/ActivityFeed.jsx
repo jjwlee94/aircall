@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
 import { CardContent, IconButton, Typography } from "@mui/material";
 import ArchiveIcon from "@mui/icons-material/Archive";
 import CallMadeIcon from "@mui/icons-material/CallMade";
@@ -9,6 +10,34 @@ import VoicemailIcon from "@mui/icons-material/Voicemail";
 import "../css/activity-feed.css";
 
 const ActivityFeed = ({ allCalls, setAllCalls }) => {
+  const [details, setDetails] = useState(false);
+
+  const getData = () => {
+    axios
+      .get("https://aircall-job.herokuapp.com/activities")
+      .then((res) => {
+        setAllCalls(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const archive = (id, getData) => {
+    axios
+      .post(`https://aircall-job.herokuapp.com/activities/${id}`, {
+        is_archived: true,
+      })
+      .then((res) => {
+        getData();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const onClick = () => (details ? setDetails(false) : setDetails(true));
+
   return (
     <div className="call-container">
       <Typography textAlign="center">All Calls</Typography>
@@ -28,10 +57,14 @@ const ActivityFeed = ({ allCalls, setAllCalls }) => {
                         )}
                       </div>
                       <div className="icon-actions">
-                        <IconButton size="small">
+                        <IconButton size="small" onClick={onClick}>
                           <InfoIcon />
                         </IconButton>
-                        <IconButton size="small">
+                        <IconButton
+                          size="small"
+                          onClick={() => {
+                            archive(call.id, getData);
+                          }}>
                           <ArchiveIcon />
                         </IconButton>
                       </div>
@@ -53,7 +86,7 @@ const ActivityFeed = ({ allCalls, setAllCalls }) => {
                         )}
                       </div>
                       <div className="icon-actions">
-                        <IconButton size="small">
+                        <IconButton size="small" onClick={onClick}>
                           <InfoIcon />
                         </IconButton>
                         <IconButton size="small">
@@ -68,12 +101,14 @@ const ActivityFeed = ({ allCalls, setAllCalls }) => {
                     </div>
                   </div>
                 )}
-                <div className="call-time">
-                  <div>
-                    {call.created_at.split("T").join(" at ").slice(0, 19)}
+                {details ? (
+                  <div className="call-time">
+                    <div>
+                      {call.created_at.split("T").join(" at ").slice(0, 19)}
+                    </div>
+                    <div>{call.duration} seconds </div>
                   </div>
-                  <div>{call.duration} seconds </div>
-                </div>
+                ) : null}
               </div>
             )}
           </CardContent>

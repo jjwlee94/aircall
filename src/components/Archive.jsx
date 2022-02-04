@@ -1,5 +1,5 @@
-import React from "react";
-import { CardContent, IconButton } from "@mui/material";
+import React, { useState } from "react";
+import { CardContent, IconButton, Typography } from "@mui/material";
 import CallMadeIcon from "@mui/icons-material/CallMade";
 import CallMissedOutgoingIcon from "@mui/icons-material/CallMissedOutgoing";
 import CallReceivedIcon from "@mui/icons-material/CallReceived";
@@ -9,8 +9,13 @@ import VoicemailIcon from "@mui/icons-material/Voicemail";
 import "../css/activity-feed.css";
 
 const ActivityFeed = ({ allCalls, setAllCalls }) => {
+  const [details, setDetails] = useState(false);
+
+  const onClick = () => (details ? setDetails(false) : setDetails(true));
+
   return (
     <div className="call-container">
+      <Typography textAlign="center">Archived Calls</Typography>
       {allCalls.map((call) => {
         return (
           <CardContent key={call}>
@@ -27,7 +32,7 @@ const ActivityFeed = ({ allCalls, setAllCalls }) => {
                         )}
                       </div>
                       <div className="icon-actions">
-                        <IconButton size="small">
+                        <IconButton size="small" onClick={onClick}>
                           <InfoIcon />
                         </IconButton>
                         <IconButton size="small">
@@ -52,7 +57,7 @@ const ActivityFeed = ({ allCalls, setAllCalls }) => {
                         )}
                       </div>
                       <div className="icon-actions">
-                        <IconButton size="small">
+                        <IconButton size="small" onClick={onClick}>
                           <InfoIcon />
                         </IconButton>
                         <IconButton size="small">
@@ -67,12 +72,14 @@ const ActivityFeed = ({ allCalls, setAllCalls }) => {
                     </div>
                   </div>
                 )}
-                <div className="call-time">
-                  <div>
-                    {call.created_at.split("T").join(" at ").slice(0, 19)}
+                {details ? (
+                  <div className="call-time">
+                    <div>
+                      {call.created_at.split("T").join(" at ").slice(0, 19)}
+                    </div>
+                    <div>{call.duration} seconds </div>
                   </div>
-                  <div>{call.duration} seconds </div>
-                </div>
+                ) : null}
               </div>
             )}
           </CardContent>

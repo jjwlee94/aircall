@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { IconButton, Tab } from "@mui/material";
-import ArchiveIcon from "@mui/icons-material/Archive";
+import InventoryIcon from "@mui/icons-material/Inventory";
 import DialpadIcon from "@mui/icons-material/Dialpad";
 import PhoneIcon from "@mui/icons-material/Phone";
 import "../css/menu.css";
@@ -23,7 +23,7 @@ const Menu = () => {
       <IconButton id="keypad">
         <DialpadIcon />
       </IconButton>
-      <Tab icon={<ArchiveIcon />} label="ARCHIVE" onClick={navigateArchive} />
+      <Tab icon={<InventoryIcon />} label="ARCHIVE" onClick={navigateArchive} />
     </footer>
   );
 };
