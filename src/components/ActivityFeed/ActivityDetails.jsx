@@ -2,10 +2,11 @@ import React from "react";
 import axios from "axios";
 import { IconButton } from "@mui/material";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import ArchiveIcon from "@mui/icons-material/Archive";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
-import UnarchiveIcon from "@mui/icons-material/Unarchive";
+import "../../styles/details.css";
 
-const ArchiveDetails = ({ allCalls, setAllCalls, id, call }) => {
+const ActivityDetails = ({ allCalls, setAllCalls, id, call }) => {
   const getData = () => {
     axios
       .get("https://aircall-job.herokuapp.com/activities")
@@ -17,10 +18,10 @@ const ArchiveDetails = ({ allCalls, setAllCalls, id, call }) => {
       });
   };
 
-  const unarchive = (id, getData) => {
+  const archive = (id, getData) => {
     axios
       .post(`https://aircall-job.herokuapp.com/activities/${id}`, {
-        is_archived: false,
+        is_archived: true,
       })
       .then((res) => {
         getData();
@@ -42,17 +43,17 @@ const ArchiveDetails = ({ allCalls, setAllCalls, id, call }) => {
           {call.duration} seconds
         </div>
       </div>
-      <div className="unarchive">
+      <div className="archive">
         <IconButton
           size="small"
           onClick={() => {
-            unarchive(call.id, getData);
+            archive(call.id, getData);
           }}>
-          <UnarchiveIcon />
+          <ArchiveIcon />
         </IconButton>
       </div>
     </div>
   );
 };
 
-export default ArchiveDetails;
+export default ActivityDetails;

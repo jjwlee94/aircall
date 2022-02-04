@@ -12,25 +12,30 @@
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
 }
 
+.caller-display {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
 .caller-details {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+
   font-weight: bold;
   padding: 10px;
 }
 
 .icons {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
 }
 
-.call-time {
+/* .call-time {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   padding-top: 10px;
   padding-bottom: 5px;
-}
+} */

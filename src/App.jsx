@@ -3,8 +3,8 @@ import ReactDOM from "react-dom";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import axios from "axios";
 import Header from "./components/Header.jsx";
-import Archive from "./components/Archive.jsx";
-import ActivityFeed from "./components/ActivityFeed.jsx";
+import Archive from "./components/ArchiveFeed/Archive.jsx";
+import ActivityFeed from "./components/ActivityFeed/ActivityFeed.jsx";
 import Menu from "./components/Menu.jsx";
 
 const App = () => {

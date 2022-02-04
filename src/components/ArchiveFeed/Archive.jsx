@@ -5,7 +5,7 @@ import CallMissedOutgoingIcon from "@mui/icons-material/CallMissedOutgoing";
 import CallReceivedIcon from "@mui/icons-material/CallReceived";
 import VoicemailIcon from "@mui/icons-material/Voicemail";
 import ArchiveDetails from "./ArchiveDetails.jsx";
-import "../css/activity-feed.css";
+import "../../styles/feed.css";
 
 const Archive = ({ allCalls, setAllCalls }) => {
   const [details, setDetails] = useState(false);
@@ -36,17 +36,20 @@ const Archive = ({ allCalls, setAllCalls }) => {
               <div className="call-details">
                 {call.direction === "outbound" ? (
                   <div className="icons">
-                    <div className="icon-static">
+                    <div className="caller-display">
                       {call.call_type === "answered" ? (
                         <CallMadeIcon />
                       ) : (
                         <CallMissedOutgoingIcon />
                       )}
-                    </div>
-
-                    <div className="caller-details">
-                      <div>{call.to}</div>
-                      <div>From {call.from}</div>
+                      <div className="caller-details">
+                        <div className="main-number">
+                          {!call.to ? "Unknown" : call.to}
+                          <div className="sub-number">
+                            From {!call.from ? "Unknown" : call.from}
+                          </div>
+                        </div>
+                      </div>
                     </div>
                     {details && id === call.id ? (
                       <ArchiveDetails
@@ -59,19 +62,19 @@ const Archive = ({ allCalls, setAllCalls }) => {
                   </div>
                 ) : (
                   <div className="icons">
-                    <div className="icon-static">
+                    <div className="caller-display">
                       {call.call_type === "voicemail" ? (
                         <CallReceivedIcon />
                       ) : (
                         <VoicemailIcon />
                       )}
-                    </div>
-                    <div className="caller-details">
-                      <div className="main-number">
-                        {!call.from ? "Unknown" : call.from}
-                      </div>
-                      <div className="sub-number">
-                        To {!call.to ? "Unknown" : call.to}
+                      <div className="caller-details">
+                        <div className="main-number">
+                          {!call.from ? "Unknown" : call.from}
+                        </div>
+                        <div className="sub-number">
+                          To {!call.to ? "Unknown" : call.to}
+                        </div>
                       </div>
                     </div>
                     {details && id === call.id ? (
