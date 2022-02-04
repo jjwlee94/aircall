@@ -1,22 +1,18 @@
 import React from "react";
-import { Button, IconButton } from "@mui/material";
+import { IconButton, Tab } from "@mui/material";
 import ArchiveIcon from "@mui/icons-material/Archive";
 import DialpadIcon from "@mui/icons-material/Dialpad";
 import PhoneIcon from "@mui/icons-material/Phone";
 import "../css/menu.css";
 
-const Menu = ({ state, setState }) => {
+const Menu = () => {
   return (
     <footer>
-      <IconButton id="calls" onClick={state}>
-        <PhoneIcon />
-      </IconButton>
+      <Tab icon={<PhoneIcon />} label="CALLS" />
       <IconButton id="keypad">
         <DialpadIcon />
       </IconButton>
-      <IconButton id="archived">
-        <ArchiveIcon />
-      </IconButton>
+      <Tab icon={<ArchiveIcon />} label="ARCHIVE" />
     </footer>
   );
 };
