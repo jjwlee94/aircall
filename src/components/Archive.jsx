@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { CardContent, IconButton, Typography } from "@mui/material";
+import { IconButton, Typography } from "@mui/material";
 import CallMadeIcon from "@mui/icons-material/CallMade";
 import CallMissedOutgoingIcon from "@mui/icons-material/CallMissedOutgoing";
 import CallReceivedIcon from "@mui/icons-material/CallReceived";
@@ -9,8 +9,10 @@ import UnarchiveIcon from "@mui/icons-material/Unarchive";
 import VoicemailIcon from "@mui/icons-material/Voicemail";
 import "../css/activity-feed.css";
 
-const ActivityFeed = ({ allCalls, setAllCalls }) => {
+const Archive = ({ allCalls, setAllCalls }) => {
   const [details, setDetails] = useState(false);
+
+  const handleClick = () => (details ? setDetails(false) : setDetails(true));
 
   const getData = () => {
     axios
@@ -36,14 +38,12 @@ const ActivityFeed = ({ allCalls, setAllCalls }) => {
       });
   };
 
-  const onClick = () => (details ? setDetails(false) : setDetails(true));
-
   return (
     <div className="call-container">
       <Typography textAlign="center">Archived Calls</Typography>
       {allCalls.map((call) => {
         return (
-          <CardContent key={call}>
+          <div className="all-calls">
             {call.is_archived === true && (
               <div className="call-details">
                 {call.direction === "outbound" ? (
@@ -57,7 +57,7 @@ const ActivityFeed = ({ allCalls, setAllCalls }) => {
                         )}
                       </div>
                       <div className="icon-actions">
-                        <IconButton size="small" onClick={onClick}>
+                        <IconButton size="small" onClick={handleClick}>
                           <InfoIcon />
                         </IconButton>
                         <IconButton
@@ -74,6 +74,12 @@ const ActivityFeed = ({ allCalls, setAllCalls }) => {
                         {call.to} via {call.via}
                       </div>
                     </div>
+                    {/* <div className="call-time">
+                      <div>
+                        {call.created_at.split("T").join(" at ").slice(0, 19)}
+                      </div>
+                      <div>{call.duration} seconds </div>
+                    </div> */}
                   </div>
                 ) : (
                   <div>
@@ -86,7 +92,7 @@ const ActivityFeed = ({ allCalls, setAllCalls }) => {
                         )}
                       </div>
                       <div className="icon-actions">
-                        <IconButton size="small" onClick={onClick}>
+                        <IconButton size="small" onClick={handleClick}>
                           <InfoIcon />
                         </IconButton>
                         <IconButton
@@ -103,23 +109,21 @@ const ActivityFeed = ({ allCalls, setAllCalls }) => {
                         {call.from} via {call.via}
                       </div>
                     </div>
+                    {/* <div className="call-time">
+                      <div>
+                        {call.created_at.split("T").join(" at ").slice(0, 19)}
+                      </div>
+                      <div>{call.duration} seconds </div>
+                    </div> */}
                   </div>
                 )}
-                {details ? (
-                  <div className="call-time">
-                    <div>
-                      {call.created_at.split("T").join(" at ").slice(0, 19)}
-                    </div>
-                    <div>{call.duration} seconds </div>
-                  </div>
-                ) : null}
               </div>
             )}
-          </CardContent>
+          </div>
         );
       })}
     </div>
   );
 };
 
-export default ActivityFeed;
+export default Archive;
