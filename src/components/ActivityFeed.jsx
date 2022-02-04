@@ -1,12 +1,10 @@
 import React, { useState } from "react";
-import axios from "axios";
-import { Button, ButtonGroup, IconButton, Typography } from "@mui/material";
-import ArchiveIcon from "@mui/icons-material/Archive";
+import { Button, ButtonGroup, Typography } from "@mui/material";
 import CallMadeIcon from "@mui/icons-material/CallMade";
 import CallMissedOutgoingIcon from "@mui/icons-material/CallMissedOutgoing";
 import CallReceivedIcon from "@mui/icons-material/CallReceived";
-import InfoIcon from "@mui/icons-material/Info";
 import VoicemailIcon from "@mui/icons-material/Voicemail";
+import ActivityDetails from "./ActivityDetails.jsx";
 import "../css/activity-feed.css";
 
 const ActivityFeed = ({ allCalls, setAllCalls }) => {
@@ -18,120 +16,70 @@ const ActivityFeed = ({ allCalls, setAllCalls }) => {
     setId(id);
   };
 
-  const getData = () => {
-    axios
-      .get("https://aircall-job.herokuapp.com/activities")
-      .then((res) => {
-        setAllCalls(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  const archive = (id, getData) => {
-    axios
-      .post(`https://aircall-job.herokuapp.com/activities/${id}`, {
-        is_archived: true,
-      })
-      .then((res) => {
-        getData();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
   return (
     <div className="call-container">
       <Typography textAlign="center">All Calls</Typography>
       <ButtonGroup
-        style={{ margin: "10px", display: "flex", justifyContent: "center" }}
+        style={{
+          margin: "10px",
+          display: "flex",
+          justifyContent: "center",
+        }}
         size="small">
         <Button color="success">Archive All</Button>
         <Button color="secondary">Reset Archive</Button>
       </ButtonGroup>
       {allCalls.map((call) => {
         return (
-          <div className="all-calls">
+          <div className="all-calls" onClick={() => handleClick(call.id)}>
             {call.is_archived === false && (
               <div className="call-details">
                 {call.direction === "outbound" ? (
-                  <div>
-                    <div className="icons">
-                      <div className="icon-static">
-                        {call.call_type === "answered" ? (
-                          <CallMadeIcon />
-                        ) : (
-                          <CallMissedOutgoingIcon />
-                        )}
-                      </div>
-                      <div className="icon-actions">
-                        <IconButton
-                          size="small"
-                          onClick={() => handleClick(call.id)}>
-                          <InfoIcon />
-                        </IconButton>
-                        <IconButton
-                          size="small"
-                          onClick={() => {
-                            archive(call.id, getData);
-                          }}>
-                          <ArchiveIcon />
-                        </IconButton>
-                      </div>
+                  <div className="icons">
+                    <div className="icon-static">
+                      {call.call_type === "answered" ? (
+                        <CallMadeIcon />
+                      ) : (
+                        <CallMissedOutgoingIcon />
+                      )}
                     </div>
                     <div className="caller-details">
-                      <div>
-                        {call.to} via {call.via}
-                      </div>
+                      <div>{call.to}</div>
+                      <div>From {call.from}</div>
                     </div>
                     {details && id === call.id ? (
-                      <div className="call-time">
-                        <div>
-                          {call.created_at.split("T").join(" at ").slice(0, 19)}
-                        </div>
-                        <div>{call.duration} seconds </div>
-                      </div>
+                      <ActivityDetails
+                        id={id}
+                        call={call}
+                        allCalls={allCalls}
+                        setAllCalls={setAllCalls}
+                      />
                     ) : null}
                   </div>
                 ) : (
-                  <div>
-                    <div className="icons">
-                      <div className="icon-static">
-                        {call.call_type === "voicemail" ? (
-                          <CallReceivedIcon />
-                        ) : (
-                          <VoicemailIcon />
-                        )}
-                      </div>
-                      <div className="icon-actions">
-                        <IconButton
-                          size="small"
-                          onClick={() => handleClick(call.id)}>
-                          <InfoIcon />
-                        </IconButton>
-                        <IconButton
-                          size="small"
-                          onClick={() => {
-                            archive(call.id, getData);
-                          }}>
-                          <ArchiveIcon />
-                        </IconButton>
-                      </div>
+                  <div className="icons">
+                    <div className="icon-static">
+                      {call.call_type === "voicemail" ? (
+                        <CallReceivedIcon />
+                      ) : (
+                        <VoicemailIcon />
+                      )}
                     </div>
                     <div className="caller-details">
-                      <div>
-                        {call.from} via {call.via}
+                      <div className="main-number">
+                        {!call.from ? "Unknown" : call.from}
+                      </div>
+                      <div className="sub-number">
+                        To {!call.to ? "Unknown" : call.to}
                       </div>
                     </div>
                     {details && id === call.id ? (
-                      <div className="call-time">
-                        <div>
-                          {call.created_at.split("T").join(" at ").slice(0, 19)}
-                        </div>
-                        <div>{call.duration} seconds </div>
-                      </div>
+                      <ActivityDetails
+                        id={id}
+                        call={call}
+                        allCalls={allCalls}
+                        setAllCalls={setAllCalls}
+                      />
                     ) : null}
                   </div>
                 )}
