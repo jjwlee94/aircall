@@ -1,5 +1,5 @@
 import React from "react";
-import { CardContent, Divider, IconButton } from "@mui/material";
+import { CardContent, IconButton, Typography } from "@mui/material";
 import ArchiveIcon from "@mui/icons-material/Archive";
 import CallMadeIcon from "@mui/icons-material/CallMade";
 import CallMissedOutgoingIcon from "@mui/icons-material/CallMissedOutgoing";
@@ -11,6 +11,7 @@ import "../css/activity-feed.css";
 const ActivityFeed = ({ allCalls, setAllCalls }) => {
   return (
     <div className="call-container">
+      <Typography textAlign="center">All Calls</Typography>
       {allCalls.map((call) => {
         return (
           <CardContent key={call}>

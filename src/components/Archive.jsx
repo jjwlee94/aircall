@@ -1,10 +1,10 @@
 import React from "react";
-import { CardContent, Divider, IconButton } from "@mui/material";
-import ArchiveIcon from "@mui/icons-material/Archive";
+import { CardContent, IconButton } from "@mui/material";
 import CallMadeIcon from "@mui/icons-material/CallMade";
 import CallMissedOutgoingIcon from "@mui/icons-material/CallMissedOutgoing";
 import CallReceivedIcon from "@mui/icons-material/CallReceived";
 import InfoIcon from "@mui/icons-material/Info";
+import UnarchiveIcon from "@mui/icons-material/Unarchive";
 import VoicemailIcon from "@mui/icons-material/Voicemail";
 import "../css/activity-feed.css";
 
@@ -31,7 +31,7 @@ const ActivityFeed = ({ allCalls, setAllCalls }) => {
                           <InfoIcon />
                         </IconButton>
                         <IconButton size="small">
-                          <ArchiveIcon />
+                          <UnarchiveIcon />
                         </IconButton>
                       </div>
                     </div>
@@ -56,7 +56,7 @@ const ActivityFeed = ({ allCalls, setAllCalls }) => {
                           <InfoIcon />
                         </IconButton>
                         <IconButton size="small">
-                          <ArchiveIcon />
+                          <UnarchiveIcon />
                         </IconButton>
                       </div>
                     </div>
