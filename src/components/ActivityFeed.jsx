@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { IconButton, Typography } from "@mui/material";
+import { Button, ButtonGroup, IconButton, Typography } from "@mui/material";
 import ArchiveIcon from "@mui/icons-material/Archive";
 import CallMadeIcon from "@mui/icons-material/CallMade";
 import CallMissedOutgoingIcon from "@mui/icons-material/CallMissedOutgoing";
@@ -10,9 +10,13 @@ import VoicemailIcon from "@mui/icons-material/Voicemail";
 import "../css/activity-feed.css";
 
 const ActivityFeed = ({ allCalls, setAllCalls }) => {
-  const [details, setDetails] = useState(null);
+  const [details, setDetails] = useState(false);
+  const [id, setId] = useState("");
 
-  const handleClick = () => (details ? setDetails(false) : setDetails(true));
+  const handleClick = (id) => {
+    setDetails(!details);
+    setId(id);
+  };
 
   const getData = () => {
     axios
@@ -41,6 +45,12 @@ const ActivityFeed = ({ allCalls, setAllCalls }) => {
   return (
     <div className="call-container">
       <Typography textAlign="center">All Calls</Typography>
+      <ButtonGroup
+        style={{ margin: "10px", display: "flex", justifyContent: "center" }}
+        size="small">
+        <Button color="success">Archive All</Button>
+        <Button color="secondary">Reset Archive</Button>
+      </ButtonGroup>
       {allCalls.map((call) => {
         return (
           <div className="all-calls">
@@ -57,7 +67,9 @@ const ActivityFeed = ({ allCalls, setAllCalls }) => {
                         )}
                       </div>
                       <div className="icon-actions">
-                        <IconButton size="small" onClick={handleClick}>
+                        <IconButton
+                          size="small"
+                          onClick={() => handleClick(call.id)}>
                           <InfoIcon />
                         </IconButton>
                         <IconButton
@@ -74,12 +86,14 @@ const ActivityFeed = ({ allCalls, setAllCalls }) => {
                         {call.to} via {call.via}
                       </div>
                     </div>
-                    {/* <div className="call-time">
-                      <div>
-                        {call.created_at.split("T").join(" at ").slice(0, 19)}
+                    {details && id === call.id ? (
+                      <div className="call-time">
+                        <div>
+                          {call.created_at.split("T").join(" at ").slice(0, 19)}
+                        </div>
+                        <div>{call.duration} seconds </div>
                       </div>
-                      <div>{call.duration} seconds </div>
-                    </div> */}
+                    ) : null}
                   </div>
                 ) : (
                   <div>
@@ -92,7 +106,9 @@ const ActivityFeed = ({ allCalls, setAllCalls }) => {
                         )}
                       </div>
                       <div className="icon-actions">
-                        <IconButton size="small" onClick={handleClick}>
+                        <IconButton
+                          size="small"
+                          onClick={() => handleClick(call.id)}>
                           <InfoIcon />
                         </IconButton>
                         <IconButton
@@ -109,12 +125,14 @@ const ActivityFeed = ({ allCalls, setAllCalls }) => {
                         {call.from} via {call.via}
                       </div>
                     </div>
-                    {/* <div className="call-time">
-                      <div>
-                        {call.created_at.split("T").join(" at ").slice(0, 19)}
+                    {details && id === call.id ? (
+                      <div className="call-time">
+                        <div>
+                          {call.created_at.split("T").join(" at ").slice(0, 19)}
+                        </div>
+                        <div>{call.duration} seconds </div>
                       </div>
-                      <div>{call.duration} seconds </div>
-                    </div> */}
+                    ) : null}
                   </div>
                 )}
               </div>

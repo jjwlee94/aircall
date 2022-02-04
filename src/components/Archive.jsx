@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { IconButton, Typography } from "@mui/material";
+import { Button, ButtonGroup, IconButton, Typography } from "@mui/material";
 import CallMadeIcon from "@mui/icons-material/CallMade";
 import CallMissedOutgoingIcon from "@mui/icons-material/CallMissedOutgoing";
 import CallReceivedIcon from "@mui/icons-material/CallReceived";
@@ -11,8 +11,12 @@ import "../css/activity-feed.css";
 
 const Archive = ({ allCalls, setAllCalls }) => {
   const [details, setDetails] = useState(false);
+  const [id, setId] = useState("");
 
-  const handleClick = () => (details ? setDetails(false) : setDetails(true));
+  const handleClick = (id) => {
+    setDetails(!details);
+    setId(id);
+  };
 
   const getData = () => {
     axios
@@ -41,6 +45,16 @@ const Archive = ({ allCalls, setAllCalls }) => {
   return (
     <div className="call-container">
       <Typography textAlign="center">Archived Calls</Typography>
+      <ButtonGroup
+        style={{
+          margin: "10px",
+          display: "flex",
+          justifyContent: "center",
+        }}
+        size="small">
+        <Button color="success">Archive All</Button>
+        <Button color="secondary">Reset Archive</Button>
+      </ButtonGroup>
       {allCalls.map((call) => {
         return (
           <div className="all-calls">
@@ -57,7 +71,9 @@ const Archive = ({ allCalls, setAllCalls }) => {
                         )}
                       </div>
                       <div className="icon-actions">
-                        <IconButton size="small" onClick={handleClick}>
+                        <IconButton
+                          size="small"
+                          onClick={() => handleClick(call.id)}>
                           <InfoIcon />
                         </IconButton>
                         <IconButton
@@ -74,12 +90,14 @@ const Archive = ({ allCalls, setAllCalls }) => {
                         {call.to} via {call.via}
                       </div>
                     </div>
-                    {/* <div className="call-time">
-                      <div>
-                        {call.created_at.split("T").join(" at ").slice(0, 19)}
+                    {details && id === call.id ? (
+                      <div className="call-time">
+                        <div>
+                          {call.created_at.split("T").join(" at ").slice(0, 19)}
+                        </div>
+                        <div>{call.duration} seconds </div>
                       </div>
-                      <div>{call.duration} seconds </div>
-                    </div> */}
+                    ) : null}
                   </div>
                 ) : (
                   <div>
@@ -92,7 +110,9 @@ const Archive = ({ allCalls, setAllCalls }) => {
                         )}
                       </div>
                       <div className="icon-actions">
-                        <IconButton size="small" onClick={handleClick}>
+                        <IconButton
+                          size="small"
+                          onClick={() => handleClick(call.id)}>
                           <InfoIcon />
                         </IconButton>
                         <IconButton
@@ -109,12 +129,14 @@ const Archive = ({ allCalls, setAllCalls }) => {
                         {call.from} via {call.via}
                       </div>
                     </div>
-                    {/* <div className="call-time">
-                      <div>
-                        {call.created_at.split("T").join(" at ").slice(0, 19)}
+                    {details && id === call.id ? (
+                      <div className="call-time">
+                        <div>
+                          {call.created_at.split("T").join(" at ").slice(0, 19)}
+                        </div>
+                        <div>{call.duration} seconds </div>
                       </div>
-                      <div>{call.duration} seconds </div>
-                    </div> */}
+                    ) : null}
                   </div>
                 )}
               </div>

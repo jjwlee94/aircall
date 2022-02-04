@@ -8,7 +8,6 @@ import ActivityFeed from "./components/ActivityFeed.jsx";
 import Menu from "./components/Menu.jsx";
 
 const App = () => {
-  const [state, setState] = useState("default");
   const [allCalls, setAllCalls] = useState([]);
 
   useEffect(() => {
