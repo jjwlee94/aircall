@@ -89,7 +89,11 @@ const ActivityFeed = ({ allCalls, setAllCalls }) => {
                         <IconButton size="small" onClick={onClick}>
                           <InfoIcon />
                         </IconButton>
-                        <IconButton size="small">
+                        <IconButton
+                          size="small"
+                          onClick={() => {
+                            archive(call.id, getData);
+                          }}>
                           <ArchiveIcon />
                         </IconButton>
                       </div>

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 import { CardContent, IconButton, Typography } from "@mui/material";
 import CallMadeIcon from "@mui/icons-material/CallMade";
 import CallMissedOutgoingIcon from "@mui/icons-material/CallMissedOutgoing";
@@ -10,6 +11,30 @@ import "../css/activity-feed.css";
 
 const ActivityFeed = ({ allCalls, setAllCalls }) => {
   const [details, setDetails] = useState(false);
+
+  const getData = () => {
+    axios
+      .get("https://aircall-job.herokuapp.com/activities")
+      .then((res) => {
+        setAllCalls(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const unarchive = (id, getData) => {
+    axios
+      .post(`https://aircall-job.herokuapp.com/activities/${id}`, {
+        is_archived: false,
+      })
+      .then((res) => {
+        getData();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   const onClick = () => (details ? setDetails(false) : setDetails(true));
 
@@ -35,7 +60,11 @@ const ActivityFeed = ({ allCalls, setAllCalls }) => {
                         <IconButton size="small" onClick={onClick}>
                           <InfoIcon />
                         </IconButton>
-                        <IconButton size="small">
+                        <IconButton
+                          size="small"
+                          onClick={() => {
+                            unarchive(call.id, getData);
+                          }}>
                           <UnarchiveIcon />
                         </IconButton>
                       </div>
@@ -60,7 +89,11 @@ const ActivityFeed = ({ allCalls, setAllCalls }) => {
                         <IconButton size="small" onClick={onClick}>
                           <InfoIcon />
                         </IconButton>
-                        <IconButton size="small">
+                        <IconButton
+                          size="small"
+                          onClick={() => {
+                            unarchive(call.id, getData);
+                          }}>
                           <UnarchiveIcon />
                         </IconButton>
                       </div>
