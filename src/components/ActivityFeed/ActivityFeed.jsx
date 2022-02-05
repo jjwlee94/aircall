@@ -82,9 +82,9 @@ const ActivityFeed = ({ allCalls, setAllCalls }) => {
                     <div className="caller-display">
                       {/* Display different icons depending on answered/missed */}
                       {call.call_type === "voicemail" ? (
-                        <CallReceivedIcon sx={{ color: "#2ae420" }} />
-                      ) : (
                         <VoicemailIcon />
+                      ) : (
+                        <CallReceivedIcon sx={{ color: "#2ae420" }} />
                       )}
                       <div className="caller-details">
                         {/* If caller information is unavailable, replace with Unknown */}
