@@ -69,12 +69,7 @@ const Archive = ({ allCalls, setAllCalls }) => {
                       </div>
                     </div>
                     {details && id === call.id ? (
-                      <ArchiveDetails
-                        id={id}
-                        call={call}
-                        allCalls={allCalls}
-                        setAllCalls={setAllCalls}
-                      />
+                      <ArchiveDetails call={call} setAllCalls={setAllCalls} />
                     ) : null}
                   </div>
                 ) : (

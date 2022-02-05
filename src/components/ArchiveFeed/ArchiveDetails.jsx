@@ -5,13 +5,12 @@ import axios from "axios";
 import { IconButton } from "@mui/material";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
-import InfoIcon from "@mui/icons-material/Info";
 import UnarchiveIcon from "@mui/icons-material/Unarchive";
 
 // Internal files
 import "../../styles/details.css";
 
-const ArchiveDetails = ({ allCalls, setAllCalls, id, call }) => {
+const ArchiveDetails = ({ setAllCalls, call }) => {
   // Get all call data
   const getData = () => {
     axios

@@ -97,12 +97,7 @@ const ActivityFeed = ({ allCalls, setAllCalls }) => {
                       </div>
                     </div>
                     {details && id === call.id ? (
-                      <ActivityDetails
-                        id={id}
-                        call={call}
-                        allCalls={allCalls}
-                        setAllCalls={setAllCalls}
-                      />
+                      <ActivityDetails call={call} setAllCalls={setAllCalls} />
                     ) : null}
                   </div>
                 )}
