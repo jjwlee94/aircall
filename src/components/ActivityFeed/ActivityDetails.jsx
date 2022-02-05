@@ -6,6 +6,7 @@ import { IconButton } from "@mui/material";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import ArchiveIcon from "@mui/icons-material/Archive";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
+import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 
 // Internal files
 import "../../styles/details.css";
@@ -36,9 +37,21 @@ const ActivityDetails = ({ setAllCalls, call }) => {
         console.log(err);
       });
   };
+
+  // Function to capitalize the first letter
+  const capitalize = (str) => {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  };
+
   return (
     <div className="call-time">
       <div className="call-info">
+        <div className="call-type">
+          <InfoOutlinedIcon fontSize="10px" />
+          <div className="text">
+            {capitalize(call.direction)}, {call.call_type}
+          </div>
+        </div>
         <div className="call-date">
           <CalendarTodayIcon fontSize="10px" />
           <div className="text">

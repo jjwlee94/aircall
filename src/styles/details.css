@@ -10,6 +10,13 @@
   margin-left: 34px;
 }
 
+.call-type {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-bottom: 5px;
+}
+
 .call-date {
   display: flex;
   flex-direction: row;
