@@ -1,9 +1,13 @@
 import React, { useState } from "react";
+
+// MUI
 import { Button, ButtonGroup, Typography } from "@mui/material";
 import CallMadeIcon from "@mui/icons-material/CallMade";
 import CallMissedOutgoingIcon from "@mui/icons-material/CallMissedOutgoing";
 import CallReceivedIcon from "@mui/icons-material/CallReceived";
 import VoicemailIcon from "@mui/icons-material/Voicemail";
+
+// Internal files
 import ActivityDetails from "./ActivityDetails.jsx";
 import "../../styles/feed.css";
 
@@ -11,6 +15,7 @@ const ActivityFeed = ({ allCalls, setAllCalls }) => {
   const [details, setDetails] = useState(false);
   const [id, setId] = useState("");
 
+  // Function to show details on click
   const handleClick = (id) => {
     setDetails(!details);
     setId(id);
@@ -19,6 +24,7 @@ const ActivityFeed = ({ allCalls, setAllCalls }) => {
   return (
     <div className="call-container">
       <Typography textAlign="center">All Calls</Typography>
+      {/* Buttons are not yet functional; added for further development */}
       <ButtonGroup
         style={{
           margin: "10px",
@@ -26,23 +32,33 @@ const ActivityFeed = ({ allCalls, setAllCalls }) => {
           justifyContent: "center",
         }}
         size="small">
-        <Button color="success">Archive All</Button>
-        <Button color="secondary">Reset Archive</Button>
+        <Button
+          variant="contained"
+          color="inherit"
+          sx={{ backgroundColor: "#2ae420" }}>
+          Archive All
+        </Button>
+        <Button variant="contained" color="inherit">
+          Reset Archive
+        </Button>
       </ButtonGroup>
       {allCalls.map((call) => {
         return (
           <div className="all-calls" onClick={() => handleClick(call.id)}>
+            {/* Only display unarchived calls */}
             {call.is_archived === false && (
               <div className="call-details">
                 {call.direction === "outbound" ? (
                   <div className="icons">
                     <div className="caller-display">
+                      {/* Display different icons depending on answered/missed */}
                       {call.call_type === "answered" ? (
                         <CallMadeIcon />
                       ) : (
                         <CallMissedOutgoingIcon />
                       )}
                       <div className="caller-details">
+                        {/* If caller information is unavailable, replace with Unknown */}
                         <div className="main-number">
                           {!call.to ? "Unknown" : call.to}
                         </div>
@@ -64,12 +80,14 @@ const ActivityFeed = ({ allCalls, setAllCalls }) => {
                 ) : (
                   <div className="icons">
                     <div className="caller-display">
+                      {/* Display different icons depending on answered/missed */}
                       {call.call_type === "voicemail" ? (
                         <CallReceivedIcon />
                       ) : (
                         <VoicemailIcon />
                       )}
                       <div className="caller-details">
+                        {/* If caller information is unavailable, replace with Unknown */}
                         <div className="main-number">
                           {!call.from ? "Unknown" : call.from}
                         </div>

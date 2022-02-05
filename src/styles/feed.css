@@ -1,7 +1,7 @@
 .call-container {
   display: flex;
   flex-direction: column;
-  height: 466px;
+  height: 486px;
 }
 
 .all-calls:hover {

@@ -1,13 +1,18 @@
 import React from "react";
 import axios from "axios";
+
+// MUI
 import { IconButton } from "@mui/material";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import InfoIcon from "@mui/icons-material/Info";
 import UnarchiveIcon from "@mui/icons-material/Unarchive";
+
+// Internal files
 import "../../styles/details.css";
 
 const ArchiveDetails = ({ allCalls, setAllCalls, id, call }) => {
+  // Get all call data
   const getData = () => {
     axios
       .get("https://aircall-job.herokuapp.com/activities")
@@ -19,6 +24,7 @@ const ArchiveDetails = ({ allCalls, setAllCalls, id, call }) => {
       });
   };
 
+  // Function to unarchive a call
   const unarchive = (id, getData) => {
     axios
       .post(`https://aircall-job.herokuapp.com/activities/${id}`, {
