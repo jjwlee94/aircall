@@ -53,9 +53,9 @@ const Archive = ({ allCalls, setAllCalls }) => {
                     <div className="caller-display">
                       {/* Display different icons depending on answered/missed */}
                       {call.call_type === "answered" ? (
-                        <CallMadeIcon />
+                        <CallMadeIcon sx={{ color: "#2ae420" }} />
                       ) : (
-                        <CallMissedOutgoingIcon />
+                        <CallMissedOutgoingIcon sx={{ color: "red" }} />
                       )}
                       <div className="caller-details">
                         {/* If caller information is unavailable, replace with Unknown */}
@@ -77,7 +77,7 @@ const Archive = ({ allCalls, setAllCalls }) => {
                     <div className="caller-display">
                       {/* Display different icons depending on answered/missed */}
                       {call.call_type === "voicemail" ? (
-                        <CallReceivedIcon />
+                        <CallReceivedIcon sx={{ color: "#2ae420" }} />
                       ) : (
                         <VoicemailIcon />
                       )}
