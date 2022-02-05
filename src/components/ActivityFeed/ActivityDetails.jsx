@@ -10,6 +10,7 @@ import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 
 // Internal files
 import "../../styles/details.css";
+import capitalize from "../../helpers/helpers.js";
 
 const ActivityDetails = ({ setAllCalls, call }) => {
   // Get all call data
@@ -36,11 +37,6 @@ const ActivityDetails = ({ setAllCalls, call }) => {
       .catch((err) => {
         console.log(err);
       });
-  };
-
-  // Function to capitalize the first letter
-  const capitalize = (str) => {
-    return str.charAt(0).toUpperCase() + str.slice(1);
   };
 
   return (

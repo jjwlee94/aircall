@@ -9,6 +9,7 @@ import UnarchiveIcon from "@mui/icons-material/Unarchive";
 
 // Internal files
 import "../../styles/details.css";
+import capitalize from "../../helpers/helpers.js";
 
 const ArchiveDetails = ({ setAllCalls, call }) => {
   // Get all call data
@@ -35,11 +36,6 @@ const ArchiveDetails = ({ setAllCalls, call }) => {
       .catch((err) => {
         console.log(err);
       });
-  };
-
-  // Function to capitalize the first letter
-  const capitalize = (str) => {
-    return str.charAt(0).toUpperCase() + str.slice(1);
   };
 
   return (
