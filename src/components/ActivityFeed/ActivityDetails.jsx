@@ -4,6 +4,7 @@ import { IconButton } from "@mui/material";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import ArchiveIcon from "@mui/icons-material/Archive";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
+import InfoIcon from "@mui/icons-material/Info";
 import "../../styles/details.css";
 
 const ActivityDetails = ({ allCalls, setAllCalls, id, call }) => {
@@ -32,15 +33,16 @@ const ActivityDetails = ({ allCalls, setAllCalls, id, call }) => {
   };
   return (
     <div className="call-time">
-      <div>
-        <div>Via: {call.via} </div>
-        <div>
+      <div className="call-info">
+        <div className="call-date">
           <CalendarTodayIcon fontSize="10px" />
-          {call.created_at.split("T").join(" at ").slice(0, 19)}
+          <div className="text">
+            {call.created_at.split("T").join(" at ").slice(0, 19)}
+          </div>
         </div>
-        <div>
+        <div className="call-duration">
           <AccessTimeIcon fontSize="10px" />
-          {call.duration} seconds
+          <div className="text">{call.duration} seconds</div>
         </div>
       </div>
       <div className="archive">

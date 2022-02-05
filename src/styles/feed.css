@@ -22,9 +22,18 @@
 .caller-details {
   display: flex;
   flex-direction: column;
-
-  font-weight: bold;
   padding: 10px;
+}
+
+.main-number {
+  font-weight: bold;
+  font-size: 15px;
+  margin-bottom: 5px;
+}
+
+.sub-number {
+  font-weight: normal;
+  font-size: 12px;
 }
 
 .icons {

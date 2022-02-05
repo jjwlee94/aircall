@@ -3,6 +3,7 @@ import axios from "axios";
 import { IconButton } from "@mui/material";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
+import InfoIcon from "@mui/icons-material/Info";
 import UnarchiveIcon from "@mui/icons-material/Unarchive";
 import "../../styles/details.css";
 
@@ -32,15 +33,16 @@ const ArchiveDetails = ({ allCalls, setAllCalls, id, call }) => {
   };
   return (
     <div className="call-time">
-      <div>
-        <div>Via: {call.via} </div>
-        <div>
+      <div className="call-info">
+        <div className="call-date">
           <CalendarTodayIcon fontSize="10px" />
-          {call.created_at.split("T").join(" at ").slice(0, 19)}
+          <div className="text">
+            {call.created_at.split("T").join(" at ").slice(0, 19)}
+          </div>
         </div>
-        <div>
+        <div className="call-duration">
           <AccessTimeIcon fontSize="10px" />
-          {call.duration} seconds
+          <div className="text">{call.duration} seconds</div>
         </div>
       </div>
       <div className="unarchive">

@@ -1,0 +1,28 @@
+.call-time {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+}
+
+.call-info {
+  margin-left: 34px;
+}
+
+.call-date {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-bottom: 5px;
+}
+
+.call-duration {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.text {
+  margin-left: 5px;
+}

@@ -45,9 +45,10 @@ const Archive = ({ allCalls, setAllCalls }) => {
                       <div className="caller-details">
                         <div className="main-number">
                           {!call.to ? "Unknown" : call.to}
-                          <div className="sub-number">
-                            From {!call.from ? "Unknown" : call.from}
-                          </div>
+                        </div>
+                        <div className="sub-number">
+                          From {!call.from ? "Unknown" : call.from} (via{" "}
+                          {call.via})
                         </div>
                       </div>
                     </div>
@@ -73,7 +74,7 @@ const Archive = ({ allCalls, setAllCalls }) => {
                           {!call.from ? "Unknown" : call.from}
                         </div>
                         <div className="sub-number">
-                          To {!call.to ? "Unknown" : call.to}
+                          To {!call.to ? "Unknown" : call.to} (via {call.via})
                         </div>
                       </div>
                     </div>
